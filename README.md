@@ -1,1 +1,2 @@
-# News-on-a-map
+# dwv_project
+DWV spring semester project

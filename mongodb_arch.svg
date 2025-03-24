@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f5f7fa" rx="10" ry="10" />
+  
+  <!-- Title -->
+  <text x="400" y="30" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#37474f">MongoDB Schema Design for Incident Monitoring</text>
+  
+  <!-- Documents -->
+  <rect x="50" y="70" width="340" height="380" rx="5" ry="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="2" />
+  <text x="220" y="90" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#0d47a1">incidents Collection</text>
+  
+  <rect x="70" y="110" width="300" height="320" rx="3" ry="3" fill="#bbdefb" stroke="#1976d2" stroke-width="1" />
+  
+  <text x="85" y="130" font-family="Arial" font-size="12" fill="#01579b">_id: ObjectId("...")</text>
+  <text x="85" y="150" font-family="Arial" font-size="12" fill="#01579b">title: "Fire in downtown area"</text>
+  <text x="85" y="170" font-family="Arial" font-size="12" fill="#01579b">source: "Regional Daily News"</text>
+  <text x="85" y="190" font-family="Arial" font-size="12" fill="#01579b">sourceUrl: "https://example.com/news/123"</text>
+  <text x="85" y="210" font-family="Arial" font-size="12" fill="#01579b">content: "A fire broke out in the downtown..."</text>
+  <text x="85" y="230" font-family="Arial" font-size="12" fill="#01579b">publishedAt: ISODate("2025-03-10T14:30:00Z")</text>
+  <text x="85" y="250" font-family="Arial" font-size="12" fill="#01579b">extractedAt: ISODate("2025-03-10T15:05:23Z")</text>
+  <text x="85" y="270" font-family="Arial" font-size="12" fill="#01579b">incidentType: "fire"</text>
+  <text x="85" y="290" font-family="Arial" font-size="12" fill="#01579b">severity: 3</text>
+  <text x="85" y="310" font-family="Arial" font-size="12" fill="#01579b">confirmed: true</text>
+  <text x="85" y="330" font-family="Arial" font-size="12" fill="#01579b">location: {</text>
+  <text x="95" y="350" font-family="Arial" font-size="12" fill="#01579b">  type: "Point",</text>
+  <text x="95" y="370" font-family="Arial" font-size="12" fill="#01579b">  coordinates: [-73.982, 40.719]</text>
+  <text x="85" y="390" font-family="Arial" font-size="12" fill="#01579b">}</text>
+  <text x="85" y="410" font-family="Arial" font-size="12" fill="#01579b">tags: ["emergency", "property damage"]</text>
+  
+  <rect x="410" y="70" width="340" height="380" rx="5" ry="5" fill="#e8eaf6" stroke="#3f51b5" stroke-width="2" />
+  <text x="580" y="90" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#1a237e">sources Collection</text>
+  
+  <rect x="430" y="110" width="300" height="140" rx="3" ry="3" fill="#c5cae9" stroke="#303f9f" stroke-width="1" />
+  
+  <text x="445" y="130" font-family="Arial" font-size="12" fill="#1a237e">_id: ObjectId("...")</text>
+  <text x="445" y="150" font-family="Arial" font-size="12" fill="#1a237e">name: "Regional Daily News"</text>
+  <text x="445" y="170" font-family="Arial" font-size="12" fill="#1a237e">type: "rss"</text>
+  <text x="445" y="190" font-family="Arial" font-size="12" fill="#1a237e">url: "https://example.com/rss/regional"</text>
+  <text x="445" y="210" font-family="Arial" font-size="12" fill="#1a237e">region: "Northeast"</text>
+  <text x="445" y="230" font-family="Arial" font-size="12" fill="#1a237e">fetchFrequency: 15 // minutes</text>
+  
+  <rect x="430" y="270" width="300" height="160" rx="3" ry="3" fill="#c5cae9" stroke="#303f9f" stroke-width="1" />
+  
+  <text x="445" y="290" font-family="Arial" font-size="12" fill="#1a237e">_id: ObjectId("...")</text>
+  <text x="445" y="310" font-family="Arial" font-size="12" fill="#1a237e">name: "City Emergency Services"</text>
+  <text x="445" y="330" font-family="Arial" font-size="12" fill="#1a237e">type: "api"</text>
+  <text x="445" y="350" font-family="Arial" font-size="12" fill="#1a237e">url: "https://cityapi.gov/emergencies"</text>
+  <text x="445" y="370" font-family="Arial" font-size="12" fill="#1a237e">apiKey: "********"</text>
+  <text x="445" y="390" font-family="Arial" font-size="12" fill="#1a237e">region: "Central"</text>
+  <text x="445" y="410" font-family="Arial" font-size="12" fill="#1a237e">fetchFrequency: 5 // minutes</text>
+  
+  <!-- Indexes -->
+  <path d="M50 460 L390 460" stroke="#78909c" stroke-width="1" stroke-dasharray="5,3" fill="none" />
+  <text x="60" y="475" font-family="Arial" font-size="11" fill="#455a64">Indexes: location (2dsphere), incidentType (1), publishedAt (-1), source (1)</text>
+  
+  <path d="M410 460 L750 460" stroke="#78909c" stroke-width="1" stroke-dasharray="5,3" fill="none" />
+  <text x="420" y="475" font-family="Arial" font-size="11" fill="#455a64">Indexes: name (1), region (1), type (1)</text>
+</svg>
