@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  news-parser:
+    build: .
+    container_name: news-parser
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - YANDEX_API_KEY=${YANDEX_API_KEY}
+      - MONGO_URI=mongodb://mongodb:27017/
+      - MONGO_DB=news_classification
+      - MONGO_COLLECTION=events
+      - MAX_WORKERS=4
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - mongodb
+    restart: on-failure
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=news_classification
+    restart: always
+
+volumes:
+  mongodb_data:

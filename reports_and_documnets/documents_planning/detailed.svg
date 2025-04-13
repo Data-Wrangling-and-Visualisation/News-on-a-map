@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
+  <!-- Background -->
+  <rect width="900" height="650" fill="#f5f7fa" rx="10" ry="10" />
+  
+  <!-- Title -->
+  <text x="450" y="30" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#37474f">Detailed Data Processing Pipeline</text>
+  
+  <!-- Source Layer -->
+  <rect x="50" y="70" width="800" height="120" rx="5" ry="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1" stroke-dasharray="5,5" />
+  <text x="110" y="90" font-family="Arial" font-size="14" font-weight="bold" fill="#0d47a1">Source Layer</text>
+  
+  <rect x="70" y="110" width="100" height="60" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="2" />
+  <text x="120" y="145" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d47a1">News API</text>
+  
+  <rect x="200" y="110" width="100" height="60" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="2" />
+  <text x="250" y="145" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d47a1">RSS Feeds</text>
+  
+  <rect x="330" y="110" width="100" height="60" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="2" />
+  <text x="380" y="145" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d47a1">Web Scrapers</text>
+  
+  <rect x="460" y="110" width="100" height="60" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="2" />
+  <text x="510" y="140" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d47a1">Social Media</text>
+  <text x="510" y="155" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d47a1">APIs</text>
+  
+  <rect x="590" y="110" width="100" height="60" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="2" />
+  <text x="640" y="145" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d47a1">Webhooks</text>
+  
+  <rect x="720" y="110" width="100" height="60" rx="5" ry="5" fill="#bbdefb" stroke="#1976d2" stroke-width="2" />
+  <text x="770" y="140" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d47a1">Regional News</text>
+  <text x="770" y="155" font-family="Arial" font-size="12" text-anchor="middle" fill="#0d47a1">Portals</text>
+  
+  <!-- Processing Layer -->
+  <rect x="50" y="220" width="800" height="170" rx="5" ry="5" fill="#e8f5e9" stroke="#2e7d32" stroke-width="1" stroke-dasharray="5,5" />
+  <text x="120" y="240" font-family="Arial" font-size="14" font-weight="bold" fill="#1b5e20">Processing Layer</text>
+  
+  <rect x="70" y="270" width="150" height="100" rx="5" ry="5" fill="#c8e6c9" stroke="#388e3c" stroke-width="2" />
+  <text x="145" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="#1b5e20">News Parser</text>
+  <text x="145" y="315" font-family="Arial" font-size="12" text-anchor="middle" fill="#1b5e20">- Text Extraction</text>
+  <text x="145" y="335" font-family="Arial" font-size="12" text-anchor="middle" fill="#1b5e20">- Date Normalization</text>
+  <text x="145" y="355" font-family="Arial" font-size="12" text-anchor="middle" fill="#1b5e20">- Content Cleaning</text>
+  
+  <rect x="250" y="270" width="150" height="100" rx="5" ry="5" fill="#fff8e1" stroke="#ff8f00" stroke-width="2" />
+  <text x="325" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="#e65100">Classifier</text>
+  <text x="325" y="315" font-family="Arial" font-size="12" text-anchor="middle" fill="#e65100">- LLM Integration</text>
+  <text x="325" y="335" font-family="Arial" font-size="12" text-anchor="middle" fill="#e65100">- Incident Detection</text>
+  <text x="325" y="355" font-family="Arial" font-size="12" text-anchor="middle" fill="#e65100">- Category Labeling</text>
+  
+  <rect x="430" y="270" width="150" height="100" rx="5" ry="5" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2" />
+  <text x="505" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="#4a148c">Geolocation Parser</text>
+  <text x="505" y="315" font-family="Arial" font-size="12" text-anchor="middle" fill="#4a148c">- Location Extraction</text>
+  <text x="505" y="335" font-family="Arial" font-size="12" text-anchor="middle" fill="#4a148c">- Geocoding</text>
+  <text x="505" y="355" font-family="Arial" font-size="12" text-anchor="middle" fill="#4a148c">- Coordinate Resolution</text>
+  
+  <rect x="610" y="270" width="150" height="100" rx="5" ry="5" fill="#e0f7fa" stroke="#006064" stroke-width="2" />
+  <text x="685" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="#006064">Data Enrichment</text>
+  <text x="685" y="355" font-family="Arial" font-size="12" text-anchor="middle" fill="#006064">- Metadata Tagging</text>
+  
+  <!-- Data Layer -->
+  <rect x="50" y="420" width="800" height="100" rx="5" ry="5" fill="#e8eaf6" stroke="#3f51b5" stroke-width="1" stroke-dasharray="5,5" />
+  <text x="110" y="440" font-family="Arial" font-size="14" font-weight="bold" fill="#1a237e">Data Layer</text>
+  
+  <rect x="200" y="460" width="150" height="40" rx="5" ry="5" fill="#c5cae9" stroke="#303f9f" stroke-width="2" />
+  <text x="275" y="485" font-family="Arial" font-size="14" text-anchor="middle" fill="#1a237e">Message Queue</text>
+  
+  <rect x="450" y="460" width="160" height="40" rx="5" ry="5" fill="#c5cae9" stroke="#303f9f" stroke-width="2" />
+  <text x="530" y="485" font-family="Arial" font-size="14" text-anchor="middle" fill="#1a237e">MongoDB</text>
+  
+  <!-- Presentation Layer -->
+  <rect x="50" y="550" width="800" height="80" rx="5" ry="5" fill="#e0f2f1" stroke="#00695c" stroke-width="1" stroke-dasharray="5,5" />
+  <text x="130" y="570" font-family="Arial" font-size="14" font-weight="bold" fill="#004d40">Presentation Layer</text>
+  
+  <!-- <rect x="100" y="590" width="220" height="30" rx="5" ry="5" fill="#b2dfdb" stroke="#00796b" stroke-width="2" />
+  <text x="210" y="610" font-family="Arial" font-size="14" text-anchor="middle" fill="#004d40">API Gateway</text>
+  
+  <rect x="350" y="590" width="220" height="30" rx="5" ry="5" fill="#b2dfdb" stroke="#00796b" stroke-width="2" />
+  <text x="460" y="610" font-family="Arial" font-size="14" text-anchor="middle" fill="#004d40">Web Frontend</text> -->
+  
+  <rect x="600" y="590" width="220" height="30" rx="5" ry="5" fill="#b2dfdb" stroke="#00796b" stroke-width="2" />
+  <text x="710" y="610" font-family="Arial" font-size="14" text-anchor="middle" fill="#004d40">Map Visualization</text>
+  
+  <!-- Flow arrows -->
+  <!-- Sources to Parser -->
+  <path d="M120 170 L120 270" stroke="#90a4ae" stroke-width="2" stroke-dasharray="5,3" fill="none" />
+  <polygon points="115,265 120,275 125,265" fill="#90a4ae" />
+  
+  <path d="M250 170 L145 270" stroke="#90a4ae" stroke-width="2" stroke-dasharray="5,3" fill="none" />
+  <polygon points="142,264 148,272 151,266" fill="#90a4ae" />
+  
+  <path d="M380 170 L150 270" stroke="#90a4ae" stroke-width="2" stroke-dasharray="5,3" fill="none" />
+  <polygon points="148,264 154,270 157,264" fill="#90a4ae" />
+  
+  <path d="M510 170 L155 270" stroke="#90a4ae" stroke-width="2" stroke-dasharray="5,3" fill="none" />
+  <polygon points="152,265 159,271 158,264" fill="#90a4ae" />
+  
+  <path d="M640 170 L160 270" stroke="#90a4ae" stroke-width="2" stroke-dasharray="5,3" fill="none" />
+  <polygon points="157,265 163,270 162,263" fill="#90a4ae" />
+  
+  <path d="M770 170 L165 270" stroke="#90a4ae" stroke-width="2" stroke-dasharray="5,3" fill="none" />
+  <polygon points="162,265 168,270 167,263" fill="#90a4ae" />
+  
+  <!-- Parser to Classifier -->
+  <path d="M220 320 L250 320" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="245,315 255,320 245,325" fill="#90a4ae" />
+  
+  <!-- Classifier to Geolocation -->
+  <path d="M400 320 L430 320" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="425,315 435,320 425,325" fill="#90a4ae" />
+  
+  <!-- Geolocation to Enrichment -->
+  <path d="M580 320 L610 320" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="605,315 615,320 605,325" fill="#90a4ae" />
+  
+  <!-- Processing to Message Queue -->
+  <path d="M145 370 L145 480 L200 480" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="195,475 205,480 195,485" fill="#90a4ae" />
+  
+  <path d="M325 370 L375 480 L400 480" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <!-- <polygon points="345,475 355,480 345,485" fill="#90a4ae" /> -->
+  
+  <path d="M505 370 L505 430 L505 450" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="500,445 510,450 500,455" fill="#90a4ae" />
+  
+  <path d="M685 370 L685 480 L610 480" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="615,475 605,480 615,485" fill="#90a4ae" />
+  
+  <!-- Message Queue to MongoDB -->
+  <path d="M350 480 L450 480" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="445,475 455,480 445,485" fill="#90a4ae" />
+  
+  <!-- MongoDB to Presentation -->
+  <path d="M530 500 L530 590" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <!-- <path d="M530 590 L350 590" stroke="#90a4ae" stroke-width="2" fill="none" /> -->
+  <!-- <polygon points="355,585 345,590 355,595" fill="#90a4ae" /> -->
+  
+  <path d="M530 590 L600 590" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="595,585 605,590 595,595" fill="#90a4ae" />
+  
+  <!-- <path d="M460 590 L320 590 L320 605 L100 605" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="105,600 95,605 105,610" fill="#90a4ae" /> -->
+</svg>
