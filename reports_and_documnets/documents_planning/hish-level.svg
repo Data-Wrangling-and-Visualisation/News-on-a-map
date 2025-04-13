@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f5f7fa" rx="10" ry="10" />
+  
+  <!-- News Sources -->
+  <rect x="50" y="100" width="120" height="80" rx="5" ry="5" fill="#e1f5fe" stroke="#0288d1" stroke-width="2" />
+  <text x="110" y="150" font-family="Arial" font-size="14" text-anchor="middle" fill="#01579b">Regional News Sources</text>
+  
+  <!-- News Parser Service -->
+  <rect x="250" y="100" width="120" height="80" rx="5" ry="5" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2" />
+  <text x="310" y="140" font-family="Arial" font-size="14" text-anchor="middle" fill="#1b5e20">News Parser</text>
+  <text x="310" y="160" font-family="Arial" font-size="12" text-anchor="middle" fill="#1b5e20">Service</text>
+  
+  <!-- Incident Classifier -->
+  <rect x="450" y="100" width="120" height="80" rx="5" ry="5" fill="#fff3e0" stroke="#e65100" stroke-width="2" />
+  <text x="510" y="140" font-family="Arial" font-size="14" text-anchor="middle" fill="#bf360c">Incident</text>
+  <text x="510" y="160" font-family="Arial" font-size="12" text-anchor="middle" fill="#bf360c">Classifier (LLM)</text>
+  
+  <!-- Geolocation Parser -->
+  <rect x="650" y="100" width="120" height="80" rx="5" ry="5" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="2" />
+  <text x="710" y="140" font-family="Arial" font-size="14" text-anchor="middle" fill="#4a148c">Geolocation</text>
+  <text x="710" y="160" font-family="Arial" font-size="12" text-anchor="middle" fill="#4a148c">Parser</text>
+  
+  <!-- MongoDB -->
+  <rect x="450" y="250" width="120" height="80" rx="5" ry="5" fill="#e8eaf6" stroke="#3f51b5" stroke-width="2" />
+  <text x="510" y="290" font-family="Arial" font-size="14" text-anchor="middle" fill="#1a237e">MongoDB</text>
+  
+  <!-- Web Service -->
+  <rect x="450" y="400" width="120" height="80" rx="5" ry="5" fill="#e0f2f1" stroke="#00695c" stroke-width="2" />
+  <text x="510" y="440" font-family="Arial" font-size="14" text-anchor="middle" fill="#004d40">Web Service</text>
+  <text x="510" y="460" font-family="Arial" font-size="12" text-anchor="middle" fill="#004d40">Map Visualization</text>
+  
+  <!-- Connections -->
+  <!-- News Sources to Parser -->
+  <path d="M170 140 L250 140" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="245,135 255,140 245,145" fill="#90a4ae" />
+  
+  <!-- Parser to Classifier -->
+  <path d="M370 140 L450 140" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="445,135 455,140 445,145" fill="#90a4ae" />
+  
+  <!-- Classifier to Geolocation -->
+  <path d="M570 140 L650 140" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="645,135 655,140 645,145" fill="#90a4ae" />
+  
+  <!-- Geolocation to MongoDB -->
+  <path d="M710 180 L710 290 L570 290" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="575,285 565,290 575,295" fill="#90a4ae" />
+  
+  <!-- MongoDB to Web Service -->
+  <path d="M510 330 L510 400" stroke="#90a4ae" stroke-width="2" fill="none" />
+  <polygon points="505,395 510,405 515,395" fill="#90a4ae" />
+  
+  <!-- Labels -->
+  <text x="400" y="40" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#37474f">Regional Incidents Monitoring System</text>
+  <text x="400" y="65" font-family="Arial" font-size="16" text-anchor="middle" fill="#546e7a">High-Level Architecture</text>
+</svg>
