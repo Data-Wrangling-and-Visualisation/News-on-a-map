@@ -91,7 +91,7 @@ news-parser/
 
    Open the file `frontend/index.html` and locate the following line:
    ```javascript
-   mapboxgl.accessToken = 'pk.eyJ1IjoidGFuZWxsZCIsImEiOiJjbTlwbmhndHgwNnVsMnFzZmQ3NTJkMW1tIn0.xk9Q74higUG33RTAT4dJRA';
+   mapboxgl.accessToken = 'pk...';
    ```
    
    Replace the token value with your own Mapbox access token. The line should look like:
