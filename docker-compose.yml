@@ -29,5 +29,25 @@ services:
       - MONGO_INITDB_DATABASE=news_classification
     restart: always
 
+  frontend:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.frontend
+    container_name: news-map-frontend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/
+      - MONGO_DB=news_classification
+      - MONGO_COLLECTION=events
+      - FLASK_APP=server.py
+      - FLASK_DEBUG=1
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./frontend:/app/frontend
+    depends_on:
+      - mongodb
+    restart: always
+
 volumes:
   mongodb_data:

@@ -351,7 +351,7 @@ class NewsParser:
                             articles_data.append(article_data)
                             print(f"Article added: {article_data['title'][:30]}...")
 
-                            if len(articles_data) >= 30:
+                            if len(articles_data) >=30:
                                 break
 
                     # Check if we should stop due to date cutoff or article limit
