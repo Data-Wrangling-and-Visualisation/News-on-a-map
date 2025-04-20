@@ -36,7 +36,6 @@ def main():
     """Main function to run the entire pipeline."""
     print(f"Starting to parse {len(SOURCES_CONFIG)} sources in parallel with {MAX_WORKERS} workers...")
     all_articles = []
-    
     # Step 1: Parse all sources in parallel
     with concurrent.futures.ProcessPoolExecutor(max_workers=MAX_WORKERS) as executor:
         results = list(executor.map(process_source, SOURCES_CONFIG))
@@ -44,7 +43,6 @@ def main():
     # Flatten results
     for result in results:
         all_articles.extend(result)
-    
     print(f"Total articles collected: {len(all_articles)}")
     
     # Ensure data directory exists

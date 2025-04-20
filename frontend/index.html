@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Map Visualization</title>
+    
+    <!-- Mapbox GL JS -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet" />
+    
+    <!-- D3.js for data handling -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 10;
+            position: relative;
+        }
+        
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .legend {
+            position: absolute;
+            bottom: 40px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 5;
+        }
+        
+        select, input[type="text"], button {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 70%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+        }
+        
+        .news-title {
+            font-size: 24px;
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .news-metadata {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .news-metadata p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .news-metadata strong {
+            color: #333;
+        }
+        
+        .news-content {
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .news-source {
+            text-align: right;
+            color: #888;
+            font-style: italic;
+        }
+        
+        .news-source a {
+            color: #4285F4;
+            text-decoration: none;
+        }
+        
+        .news-source a:hover {
+            text-decoration: underline;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: #e0e0e0;
+            color: #333;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        /* Custom marker styles using CSS instead of HTML elements */
+        .custom-marker {
+            background-size: cover;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+            box-shadow: 0 0 2px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .custom-marker:hover {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .zoom-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 12px;
+            z-index: 5;
+        }
+        
+        /* Custom popup styles */
+        .mapboxgl-popup {
+            max-width: 300px;
+            z-index: 10;
+        }
+        
+        .mapboxgl-popup-content {
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .mapboxgl-popup-content h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 16px;
+        }
+        
+        .mapboxgl-popup-content p {
+            margin: 5px 0;
+            font-size: 13px;
+        }
+        
+        .mapboxgl-popup-content .click-info {
+            font-style: italic;
+            color: #888;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        /* Using will-change to improve marker rendering performance */
+        .mapboxgl-marker {
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Global Event Map</h1>
+        
+        <div class="controls">
+            <div>
+                <label for="category-filter">Filter by Category: </label>
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div>
+                <input type="text" id="search-input" placeholder="Search events...">
+                <button id="search-button">Search</button>
+            </div>
+        </div>
+        
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="legend" id="legend"></div>
+            <div class="zoom-info" id="zoom-info">Zoom Level: <span id="zoom-level">0</span></div>
+        </div>
+    </div>
+    
+    <!-- Modal for displaying full news details -->
+    <div id="news-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-modal">&times;</span>
+            <h2 class="news-title" id="modal-title"></h2>
+            
+            <div class="news-metadata">
+                <p><strong>Published:</strong> <span id="modal-date"></span></p>
+                <p><strong>Location:</strong> <span id="modal-location"></span></p>
+                <p><strong>Category:</strong> <span id="modal-category"></span></p>
+            </div>
+            
+            <div class="news-content" id="modal-content"></div>
+            
+            <div class="news-source">
+                Source: <span id="modal-source"></span> - 
+                <a href="#" id="modal-url" target="_blank">View Original</a>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Set Mapbox access token
+        mapboxgl.accessToken = 'your_key';
+        
+        // Color scale for categories
+        const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+        
+        // Initialize Mapbox map
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/light-v11', // Light style for a flat map appearance
+            center: [0, 30], // Starting position [lng, lat]
+            zoom: 1.5, // Starting zoom
+            projection: 'mercator', // Explicitly set to Mercator projection for a flat map
+            renderWorldCopies: true, // Prevents rendering issues with markers near the edges
+            antialias: true, // Smoother rendering
+            fadeDuration: 0 // Remove transition fading to reduce perceived lag
+        });
+        
+        // Storage for event data and markers
+        let eventData = [];
+        let mapMarkers = {};
+        
+        // Modal setup
+        const modal = document.getElementById('news-modal');
+        const closeModal = document.getElementById('close-modal');
+        
+        // Close modal when clicking the close button
+        closeModal.onclick = function() {
+            modal.style.display = 'none';
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        // Function to display news details in modal
+        function showNewsDetails(event) {
+            document.getElementById('modal-title').textContent = event.title;
+            document.getElementById('modal-date').textContent = new Date(event.date).toLocaleString();
+            document.getElementById('modal-location').textContent = event.location.replace('Место: ', '');
+            
+            const categoryEl = document.getElementById('modal-category');
+            categoryEl.innerHTML = `<span style="background-color: ${colorScale(event.category)}" class="category-tag">${event.category}</span>`;
+            
+            document.getElementById('modal-content').textContent = event.content;
+            document.getElementById('modal-source').textContent = event.source_name;
+            
+            const urlElement = document.getElementById('modal-url');
+            urlElement.href = event.url;
+            
+            modal.style.display = 'block';
+        }
+        
+        // Update zoom level display
+        map.on('zoom', () => {
+            document.getElementById('zoom-level').textContent = Math.floor(map.getZoom());
+        });
+        
+        // Function to load events from API
+        function loadEvents(category = 'all', searchText = '') {
+            let url = '/api/events';
+            const params = new URLSearchParams();
+            
+            if (category !== 'all') {
+                params.append('category', category);
+            }
+            
+            if (searchText) {
+                params.append('search', searchText);
+            }
+            
+            if (params.toString()) {
+                url += '?' + params.toString();
+            }
+            
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(events => {
+                    // Store event data globally
+                    eventData = events;
+                    
+                    // Clear existing markers
+                    clearMarkers();
+                    
+                    // Add markers to the map
+                    addMarkersToMap(events);
+                    
+                    // Update legend
+                    updateLegend(events);
+                })
+                .catch(error => {
+                    console.error("Error fetching events:", error);
+                });
+        }
+        
+        // Function to clear markers from the map
+        function clearMarkers() {
+            // Remove each marker from the map
+            for (const id in mapMarkers) {
+                mapMarkers[id].remove();
+            }
+            mapMarkers = {}; // Reset the markers object
+        }
+        
+        // Optimized function to create markers with better performance
+        function addMarkersToMap(events) {
+            events.forEach((event, index) => {
+                try {
+                    // Check if we have valid coordinates
+                    if (!event.longitude || !event.latitude) {
+                        return;
+                    }
+                    
+                    // Parse coordinates if they're strings
+                    const lng = typeof event.longitude === 'string' ? parseFloat(event.longitude) : event.longitude;
+                    const lat = typeof event.latitude === 'string' ? parseFloat(event.latitude) : event.latitude;
+                    
+                    // Validate coordinates are numbers and in valid range
+                    if (isNaN(lng) || isNaN(lat) || lng < -180 || lng > 180 || lat < -90 || lat > 90) {
+                        return;
+                    }
+                    
+                    // Create a marker element
+                    const el = document.createElement('div');
+                    el.className = 'custom-marker';
+                    el.style.backgroundColor = colorScale(event.category);
+                    
+                    // Store the event ID with the marker for reference
+                    const eventId = `event-${index}`;
+                    el.dataset.eventId = eventId;
+                    
+                    // Create popup HTML content
+                    const popupHTML = `
+                        <h4>${event.title}</h4>
+                        <p><strong>Date:</strong> ${new Date(event.date).toLocaleString()}</p>
+                        <p><strong>Category:</strong> ${event.category}</p>
+                        <p><strong>Location:</strong> ${event.location}</p>
+                        <p class="click-info">Click for full details</p>
+                    `;
+                    
+                    // Create a marker instance
+                    const marker = new mapboxgl.Marker({
+                        element: el,
+                        anchor: 'center',
+                        offset: [0, 0]
+                    })
+                    .setLngLat([lng, lat])
+                    .addTo(map);
+                    
+                    // Store marker in our tracking object
+                    mapMarkers[eventId] = marker;
+                    
+                    // We'll create the popup each time on mouseenter instead of reusing
+                    el.addEventListener('mouseenter', () => {
+                        // Create a fresh popup each time
+                        const popup = new mapboxgl.Popup({
+                            offset: 25,
+                            closeButton: false,
+                            closeOnClick: false,
+                            maxWidth: '300px'
+                        })
+                        .setLngLat([lng, lat])
+                        .setHTML(popupHTML)
+                        .addTo(map);
+                        
+                        // Store the popup reference on the element
+                        el._popup = popup;
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        // Only remove if popup exists
+                        if (el._popup) {
+                            el._popup.remove();
+                            el._popup = null; // Clear the reference
+                        }
+                    });
+                    
+                    el.addEventListener('click', () => {
+                        showNewsDetails(event);
+                    });
+                    
+                } catch (err) {
+                    console.error(`Error creating marker:`, err);
+                }
+            });
+        }
+        
+        // Function to update legend
+        function updateLegend(events) {
+            const legend = d3.select('#legend');
+            
+            // Clear existing legend
+            legend.html('');
+            
+            // Get unique categories
+            const categories = [...new Set(events.map(d => d.category))];
+            
+            // Create legend title
+            legend.append('div')
+                .style('font-weight', 'bold')
+                .style('margin-bottom', '5px')
+                .text('Categories');
+            
+            // Create legend items
+            categories.forEach((category, i) => {
+                const legendItem = legend.append('div')
+                    .style('display', 'flex')
+                    .style('align-items', 'center')
+                    .style('margin-bottom', '5px');
+                
+                legendItem.append('div')
+                    .style('width', '15px')
+                    .style('height', '15px')
+                    .style('background-color', colorScale(category))
+                    .style('margin-right', '5px')
+                    .style('border-radius', '50%');
+                
+                legendItem.append('div')
+                    .text(category);
+            });
+        }
+        
+        // Improve map performance by disabling map rotation
+        map.dragRotate.disable();
+        map.touchZoomRotate.disableRotation();
+        
+        // Wait for map to load before adding events
+        map.on('load', () => {
+            // Set initial zoom info
+            document.getElementById('zoom-level').textContent = Math.floor(map.getZoom());
+            
+            // Load initial events
+            loadEvents();
+        });
+        
+        // Event listeners for controls
+        document.getElementById('category-filter').addEventListener('change', function() {
+            const category = this.value;
+            const searchText = document.getElementById('search-input').value;
+            loadEvents(category, searchText);
+        });
+        
+        document.getElementById('search-button').addEventListener('click', function() {
+            const category = document.getElementById('category-filter').value;
+            const searchText = document.getElementById('search-input').value;
+            loadEvents(category, searchText);
+        });
+        
+        document.getElementById('search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const category = document.getElementById('category-filter').value;
+                const searchText = this.value;
+                loadEvents(category, searchText);
+            }
+        });
+    </script>
+</body>
+</html>
